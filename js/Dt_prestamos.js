@@ -1,4 +1,4 @@
-export default Dt_prestamos = [
+let Dt_prestamos = [
     {
         cliente: "Luis",
         codigo: 1111,
@@ -18,3 +18,5 @@ export default Dt_prestamos = [
         meses: 5,
     }
 ];
+
+export default Dt_prestamos;
