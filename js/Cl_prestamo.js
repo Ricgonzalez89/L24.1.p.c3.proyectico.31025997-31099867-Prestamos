@@ -1,32 +1,32 @@
 export default class Cl_prestamo {
-    constructor(cliente,codigo,prestamo,meses){
-        this.cliente=cliente;
-        this.codigo=codigo;
-        this.prestamo=prestamo;
-        this.meses=meses;
+    constructor(cliente, codigo, prestamo, meses) {
+        this.cliente = cliente;
+        this.codigo = codigo;
+        this.prestamo = prestamo;
+        this.meses = meses;
     }
-    set cliente (cli){
-        this._cliente=cli;
+    set cliente(cli) {
+        this._cliente = cli;
     }
-    get cliente(){
+    get cliente() {
         return this._cliente;
     }
-    set codigo(co){
-        this._codigo=+co;
+    set codigo(co) {
+        this._codigo = +co;
     }
-    get codigo(){
+    get codigo() {
         return this._codigo;
     }
-    set prestamo(pre){
-        this._prestamo=+pre;
+    set prestamo(pre) {
+        this._prestamo = +pre;
     }
-    get prestamo(){
+    get prestamo() {
         return this._prestamo;
     }
-    set meses(me){
-        this._meses=+me;
+    set meses(me) {
+        this._meses = +me;
     }
-    get meses(){
+    get meses() {
         return this._meses;
     }
 }
