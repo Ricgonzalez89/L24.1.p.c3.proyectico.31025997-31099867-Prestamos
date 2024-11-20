@@ -100,6 +100,17 @@ let modificarPrestamo = (oficina, salida) => {
     }
 };
 
+let mtoFinalDisp = (oficina,salida) =>{
+    salida.innerHTML = "";
+    salida.innerHTML += `El monto final disponible es: ${oficina.mtoFinalDisp()}`;
+}
+
+let clientesDosMeses = (oficina,salida) =>{
+    salida.innerHTML = "";
+    salida.innerHTML += `clientes que con dos meses de prestamos: ${oficina.}`
+
+}
+
 let salida1 = document.getElementById("salida1");
 let salida2 = document.getElementById("salida2");
 let opciones = document.getElementById("opciones");
@@ -110,6 +121,9 @@ salida1.innerHTML = `
 <br> 2 = Agregar prestamo.
 <br> 3 = Eliminar prestamo.
 <br> 4 = Modificar prestamo.
+<br> 5 = Mostrar Monto Final Disponible en caja
+<br> 6 = Mostrar clientes con 2 meses de pretamo
+<br> 7 = Mostrar cleintes con el prestamo minimo
 `;
 
 opciones.onclick = () => {
@@ -127,5 +141,13 @@ opciones.onclick = () => {
         case 4:
             modificarPrestamo(oficina, salida2);
             break;
+        case 5:
+            mtoFinalDisp(oficina,salida2);
+            break;
+        case 6:
+            clientesDosMeses(oficina,salida2);
+            break;
+        case 7:
+            clientesPrestamoMinimo(oficina,salida2);
     }
 };
