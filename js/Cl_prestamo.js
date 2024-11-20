@@ -12,7 +12,7 @@ export default class Cl_prestamo {
         return this._cliente;
     }
     set codigo(co){
-        this._codigo=co;
+        this._codigo=+co;
     }
     get codigo(){
         return this._codigo;

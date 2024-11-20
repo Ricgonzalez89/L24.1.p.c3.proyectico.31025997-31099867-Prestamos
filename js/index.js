@@ -31,13 +31,74 @@ Dt_prestamos.forEach((persona) => {
 
 let listarPrestamos = (oficina, salida) => {
     salida.innerHTML = "";
-    oficina.prestamos.forEach((prestamo) => {
-        salida.innerHTML += `
-            <br>Cliente: ${prestamo.cliente} - Código: ${prestamo.codigo} - 
-            Préstamo: ${prestamo.prestamo} - Meses: ${prestamo.meses}
-        `
-    });
+    let salidaTab = `
+    <br>
+        <table>
+            <tr>
+                <th>Cliente</th>
+                <th>Código</th>
+                <th>Préstamo</th>
+                <th>Meses</th>
+            </tr>
+    `;
+    if (oficina.prestamos.length > 0) {
+        /*oficina.prestamos.forEach((prestamo) => {
+            salida.innerHTML += `
+                <br>Cliente: ${prestamo.cliente} - Código: ${prestamo.codigo} - 
+                Préstamo: ${prestamo.prestamo} - Meses: ${prestamo.meses}
+            `
+        });*/
+        oficina.prestamos.forEach((prestamo) => {
+            salidaTab += `
+                <tr>
+                    <td>${prestamo.cliente}</td>
+                    <td>${prestamo.codigo}</td>
+                    <td>${prestamo.prestamo}</td>
+                    <td>${prestamo.meses}</td>
+                </tr>
+            `;
+        });
+        salidaTab += `</table>`;
+        salida.innerHTML += salidaTab;
+    } else {
+        salida.innerHTML += `No se han registrado clientes en la base de datos.`
+    }
 }
+
+let agregarPrestamo = (oficina) => {
+    let codigo = prompt("Ingrese el código del cliente: ");
+    let cliente = prompt("Ingrese el nombre del cliente: ");
+    let prestamo = prompt("Ingrese el monto del préstamo solicitado: ");
+    let meses = prompt("Ingrese la cantidad de meses del préstamo: ");
+    oficina.agregarPrestamo(new Cl_prestamo(cliente, codigo, prestamo, meses));
+};
+
+let eliminarPrestamo = (oficina, salida) => {
+    salida.innerHTML = "";
+    let codigo = prompt("Ingrese el código del cliente que desea eliminar: ");
+    if (oficina.eliminarPrestamo(codigo))
+        salida.innerHTML += `El cliente con código: ${codigo}, ha sido eliminado`;
+    else
+        salida.innerHTML += `No existe el cliente con el código especificado.`;
+};
+
+let modificarPrestamo = (oficina, salida) => {
+    salida.innerHTML = "";
+    let codigo = +prompt("Ingrese el código del cliente que desea modificar: ");
+    let resultado = oficina.prestamos.filter((prestamo) => prestamo.codigo === codigo);
+
+    if (resultado.length > 0) {
+        let cliente = prompt("Ingrese el nuevo nombre del cliente: ");
+        let prestamo = prompt("Ingrese el nuevo monto del préstamo solicitado: ");
+        let meses = prompt("Ingrese la nueva cantidad de meses del préstamo: ");
+        if(oficina.modificarPrestamo(codigo, new Cl_prestamo(cliente, codigo, prestamo, meses)))
+            salida.innerHTML += `Se ha modificado el cliente con código: ${codigo}`;
+        else
+            salida.innerHTML += `No se pudo modificar el cliente`;
+    } else {
+        salida.innerHTML += `No existe el cliente con el código especificado`;
+    }
+};
 
 let salida1 = document.getElementById("salida1");
 let salida2 = document.getElementById("salida2");
@@ -46,9 +107,9 @@ let opciones = document.getElementById("opciones");
 salida1.innerHTML = `
 <br>Seleccione una opción:
 <br> 1 = Listar prestamos.
-<br> 2 = Agregar prestamos.
-<br> 3 = Eliminar prestamos.
-<br> 4 = Modificar prestamos.
+<br> 2 = Agregar prestamo.
+<br> 3 = Eliminar prestamo.
+<br> 4 = Modificar prestamo.
 `;
 
 opciones.onclick = () => {
@@ -56,6 +117,15 @@ opciones.onclick = () => {
     switch (opcion) {
         case 1: 
             listarPrestamos(oficina, salida2);
+            break;
+        case 2:
+            agregarPrestamo(oficina);
+            break;
+        case 3:
+            eliminarPrestamo(oficina, salida2);
+            break;
+        case 4:
+            modificarPrestamo(oficina, salida2);
             break;
     }
 };

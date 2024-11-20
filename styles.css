@@ -1,0 +1,11 @@
+#salida2 {
+    /*border: 1px solid #000;*/
+    align-content: center;
+    padding: 10px 0px;
+    margin-top:5px;
+}
+
+table, tr, th, td {
+    border: 1px solid #000;
+    text-align: center;
+}

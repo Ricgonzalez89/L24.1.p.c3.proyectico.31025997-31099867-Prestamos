@@ -26,17 +26,19 @@ export default class Cl_oficina {
     }
 
     eliminarPrestamo(codigo) { //retorna true o false si logra eliminar el prestamo
+        codigo = +codigo;
         let indexPrestamo = -1;
         for (let i = 0; i < this.prestamos.length; i++) {
             if (this.prestamos[i].codigo === codigo)
                 indexPrestamo = i;
         }
         if (indexPrestamo !== -1) 
-            this.articulos.splice(indexPrestamo, 1);
+            this.prestamos.splice(indexPrestamo, 1);
         return indexPrestamo !== -1;
     }
 
     modificarPrestamo(codigo, prestamo) { //retorna true o false si logra modificar el prestamo
+        codigo = +codigo;
         let indexPrestamo = -1;
         for (let i = 0; i < this.prestamos.length; i++) {
             if (this.prestamos[i].codigo === codigo)
