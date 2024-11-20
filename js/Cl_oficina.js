@@ -1,3 +1,5 @@
+import Cl_prestamo from "./Cl_prestamo.js";
+
 export default class Cl_oficina {
     constructor(montoDisponible, porcComisionMensual) {
         this.montoCaja = montoDisponible;
@@ -21,8 +23,9 @@ export default class Cl_oficina {
         return this._porcComisionMensual;
     }
 
-    agregarPrestamo(prestamo) {
-        this.prestamos.push(prestamo);
+    agregarPrestamo(cliente, codigo, prestamo, meses) {
+        let objeto = new Cl_prestamo(cliente, codigo, prestamo, meses, this.porcComisionMensual);
+        this.prestamos.push(objeto);
     }
 
     eliminarPrestamo(codigo) { //retorna true o false si logra eliminar el prestamo
@@ -37,7 +40,8 @@ export default class Cl_oficina {
         return indexPrestamo !== -1;
     }
 
-    modificarPrestamo(codigo, prestamo) { //retorna true o false si logra modificar el prestamo
+    modificarPrestamo(codigo, cliente, prestamo, meses) { 
+        //retorna true o false si logra modificar el prestamo
         codigo = +codigo;
         let indexPrestamo = -1;
         for (let i = 0; i < this.prestamos.length; i++) {
@@ -45,7 +49,9 @@ export default class Cl_oficina {
                 indexPrestamo = i;
         }
         if (indexPrestamo !== -1)
-            this.prestamos.splice(indexPrestamo, 1, prestamo);
+            this.prestamos.splice(
+            indexPrestamo, 1, new Cl_prestamo( cliente, codigo, prestamo, meses, this.porcComisionMensual)
+            );
         return indexPrestamo !== -1;
     }
 

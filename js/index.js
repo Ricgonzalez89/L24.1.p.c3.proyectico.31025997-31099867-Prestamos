@@ -25,7 +25,7 @@ let oficina = new Cl_oficina(Dt_oficina.montoDisponible, Dt_oficina.porcComision
 
 Dt_prestamos.forEach((persona) => {
     oficina.agregarPrestamo(
-        new Cl_prestamo(persona.cliente, persona.codigo, persona.prestamo, persona.meses)
+        persona.cliente, persona.codigo, persona.prestamo, persona.meses
     );
 })
 
@@ -70,7 +70,7 @@ let agregarPrestamo = (oficina) => {
     let cliente = prompt("Ingrese el nombre del cliente: ");
     let prestamo = prompt("Ingrese el monto del préstamo solicitado: ");
     let meses = prompt("Ingrese la cantidad de meses del préstamo: ");
-    oficina.agregarPrestamo(new Cl_prestamo(cliente, codigo, prestamo, meses));
+    oficina.agregarPrestamo(cliente, codigo, prestamo, meses);
 };
 
 let eliminarPrestamo = (oficina, salida) => {
@@ -91,7 +91,7 @@ let modificarPrestamo = (oficina, salida) => {
         let cliente = prompt("Ingrese el nuevo nombre del cliente: ");
         let prestamo = prompt("Ingrese el nuevo monto del préstamo solicitado: ");
         let meses = prompt("Ingrese la nueva cantidad de meses del préstamo: ");
-        if(oficina.modificarPrestamo(codigo, new Cl_prestamo(cliente, codigo, prestamo, meses)))
+        if(oficina.modificarPrestamo(codigo, cliente, prestamo, meses))
             salida.innerHTML += `Se ha modificado el cliente con código: ${codigo}`;
         else
             salida.innerHTML += `No se pudo modificar el cliente`;
