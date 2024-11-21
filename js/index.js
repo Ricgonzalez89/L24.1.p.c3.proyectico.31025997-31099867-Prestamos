@@ -56,7 +56,7 @@ let listarPrestamos = (oficina, salida) => {
                     <td>${prestamo.codigo}</td>
                     <td>${prestamo.prestamo}</td>
                     <td>${prestamo.meses}</td>
-                    <td>${prestamo.aPagar()}</td>
+                    <td>${prestamo.aPagar().toFixed(2)}</td>
                 </tr>
             `;
         });
@@ -127,7 +127,7 @@ let clientesDosMeses = (oficina, salida) => {
                     <td>${cliente.cliente}</td>
                     <td>${cliente.codigo}</td>
                     <td>${cliente.prestamo}</td>
-                    <td>${cliente.aPagar()}</td>
+                    <td>${cliente.aPagar().toFixed(2)}</td>
                 </tr>
             `;
         });
@@ -161,7 +161,7 @@ let clientesPrestamoMinimo = (oficina,salida)=> {
                     <td>${cliente.codigo}</td>
                     <td>${cliente.prestamo}</td>
                     <td>${cliente.meses}</td>
-                    <td>${cliente.aPagar()}</td>
+                    <td>${cliente.aPagar().toFixed(2)}</td>
                 </tr>
             `;
         });
