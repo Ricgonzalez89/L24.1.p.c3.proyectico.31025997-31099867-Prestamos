@@ -39,6 +39,7 @@ let listarPrestamos = (oficina, salida) => {
                 <th>Código</th>
                 <th>Préstamo</th>
                 <th>Meses</th>
+                <th>Monto a pagar</th>
             </tr>
     `;
     if (oficina.prestamos.length > 0) {
@@ -55,6 +56,7 @@ let listarPrestamos = (oficina, salida) => {
                     <td>${prestamo.codigo}</td>
                     <td>${prestamo.prestamo}</td>
                     <td>${prestamo.meses}</td>
+                    <td>${prestamo.aPagar()}</td>
                 </tr>
             `;
         });
@@ -100,16 +102,76 @@ let modificarPrestamo = (oficina, salida) => {
     }
 };
 
-let mtoFinalDisp = (oficina,salida) =>{
+let mtoFinalDisp = (oficina, salida) => {
     salida.innerHTML = "";
     salida.innerHTML += `El monto final disponible es: ${oficina.mtoFinalDisp()}`;
-}
+};
 
-let clientesDosMeses = (oficina,salida) =>{
+let clientesDosMeses = (oficina, salida) => {
     salida.innerHTML = "";
-    salida.innerHTML += `clientes que con dos meses de prestamos: ${oficina.}`
+    let resultado = oficina.clientesDosMeses();
+    let salidaTab = `
+    <br>
+    <table>
+            <tr>
+                <th>Cliente</th>
+                <th>Código</th>
+                <th>Préstamo</th>
+                <th>Monto a pagar</th>
+            </tr>
+    `;
+    if (resultado.length > 0) {
+        resultado.forEach((cliente) => {
+            salidaTab += `
+                <tr>
+                    <td>${cliente.cliente}</td>
+                    <td>${cliente.codigo}</td>
+                    <td>${cliente.prestamo}</td>
+                    <td>${cliente.aPagar()}</td>
+                </tr>
+            `;
+        });
+        salidaTab += `</table>`;
+        salida.innerHTML += salidaTab;
+    } else {
+        salida.innerHTML += `No hay ningun cliente que pidio por dos meses.`
+    }
+ 
+};
 
-}
+let clientesPrestamoMinimo = (oficina,salida)=> {
+    salida.innerHTML = "";
+    let resultado = oficina.clientesPrestamoMinimo();
+    let salidaTab = `
+    <br>
+    <table>
+            <tr>
+                <th>Cliente</th>
+                <th>Código</th>
+                <th>Préstamo</th>
+                <th>Meses</th>
+                <th>Monto a pagar</th>
+            </tr>
+    `;
+    if (resultado.length > 0) {
+        resultado.forEach((cliente) => {
+            salidaTab += `
+                <tr>
+                    <td>${cliente.cliente}</td>
+                    <td>${cliente.codigo}</td>
+                    <td>${cliente.prestamo}</td>
+                    <td>${cliente.meses}</td>
+                    <td>${cliente.aPagar()}</td>
+                </tr>
+            `;
+        });
+        salidaTab += `</table>`;
+        salida.innerHTML += salidaTab;
+    } else {
+        salida.innerHTML += `no hay clientes con prestamo minimo`
+    }
+ 
+};
 
 let salida1 = document.getElementById("salida1");
 let salida2 = document.getElementById("salida2");
@@ -121,9 +183,9 @@ salida1.innerHTML = `
 <br> 2 = Agregar prestamo.
 <br> 3 = Eliminar prestamo.
 <br> 4 = Modificar prestamo.
-<br> 5 = Mostrar Monto Final Disponible en caja
-<br> 6 = Mostrar clientes con 2 meses de pretamo
-<br> 7 = Mostrar cleintes con el prestamo minimo
+<br> 5 = Mostrar Monto Final Disponible en caja.
+<br> 6 = Mostrar clientes con 2 meses de pretamo.
+<br> 7 = Mostrar clientes con el prestamo minimo.
 `;
 
 opciones.onclick = () => {
@@ -149,5 +211,6 @@ opciones.onclick = () => {
             break;
         case 7:
             clientesPrestamoMinimo(oficina,salida2);
+            break;
     }
 };
